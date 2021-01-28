@@ -1,0 +1,29 @@
+language: php
+
+php:
+  - 7.3
+  - 7.4
+
+before_script:
+  - composer self-update
+  - composer install --dev --prefer-source;
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - mysql -e "create database IF NOT EXISTS lmc_user;" -uroot
+
+script:
+  - ./vendor/bin/phpunit --bootstrap=tests/bootstrap.php --configuration tests/phpunit.xml
+  - ./vendor/bin/phpcs -n --standard=PSR2 ./src/ ./tests/
+
+services:
+  - mysql
+
+after_script:
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+
+notifications:
+  email: "mail@matwright.dev"
+
+
+
+matrix:
+  fast_finish: true

@@ -1,0 +1,154 @@
+<?php $this->headTitle('Zusammenfassung der Master-Bewerbung – Fakultät für Wirtschaftswissenschaften der Uni Regensburg');?>
+
+<?php if($this->currentBewerber->getAbgeschickt()):?>
+<div class="card-deck">
+	<div class="card">
+		 <div class="card-body">		 
+			Sie haben Ihre Bewerbung am <?php echo $this->currentBewerber->getModifikation()?> online abgeschickt.<br><br>
+			Bitte drucken Sie untenstehendes <a  href="<?php echo $this->base;?>/master-bewerbung/zusammenfassung?idBewerbungscode=<?php echo $this->currentBewerber->getIdBewerbungscode();?>"> PDF </a> aus und senden Sie uns diese postalisch zu.<br><br>
+			Universität Regensburg<br>
+			Fakultät für Wirtschaftswissenschaften<br>
+			Dekanat, Stichwort: Masterbewerbung<br>
+			Universitätsstraße 31<br>
+			93049 Regensburg<br>
+			Deutschland<br><br>
+			Fax: 0941 943812474<br><br>
+			Bei Fragen können Sie uns unter folgender Nummer erreichen: +49 941 9432474.
+		</div>
+		<a  href="<?php echo $this->base;?>/master-bewerbung/zusammenfassung?idBewerbungscode=<?php echo $this->currentBewerber->getIdBewerbungscode();?>"class="btn btn-outline-primary"> PDF Zusammenfassung</a>
+	</div>
+</div><br>
+<?php endif; ?>
+
+<?php if(!$this->currentBewerber->getAbgeschickt()):?>
+<div class="card-deck">
+	<div class="card">
+		<h2 class="card-header">Überprüfen und hochladen</h2>
+		 <div class="card-body">
+			Bitte überprüfen Sie die übermittelten Angaben. Sie können die Angaben noch korrigieren. Wenn alle Angaben stimmen, können Sie Ihre Bewerbung endgültig absenden.<br></br>
+			Nach dem endgültigen Absenden ist eine Änderung Ihrer persönlichen Daten nicht mehr möglich! <br></br>
+			Nach dem Absenden Ihrer Bewerbung müssen Sie uns Ihre Bewerbungsunterlagen in elektronischer und schriftlicher Form zukommen lassen. Die elektronische Bereitstellung Ihrer Bewerbungsunterlagen beschleunigt die Bearbeitung Ihrer Bewerbung. <br>
+		</div>
+	</div>
+</div><br>
+<?php else: ?>
+<div class="card-deck">
+	<div class="card">
+		 <p><strong>Status Ihrer Bewerbung:</strong></p>
+		 <div class="card-body">
+		    <p style="padding-left: 24px;">
+			<?php if($currentBewerber->getVersandfreigabe()) { ?>
+			    <progress value="4" max="4" id="progressBar" style="margin-right: 12px;"></progress>
+			    Der Bescheid Ihrer Bewerbung wurde versandt und sollte Ihnen in den n&auml;chsten Tagen zugehen.
+			<?php } elseif($currentBewerber->getStatus()) { ?>
+			    <progress value="3" max="4" id="progressBar" style="margin-right: 12px;"></progress>
+			    Ihre Bewerbung wurde gepr&uuml;ft, der Bescheid wurde noch nicht verschickt.
+			<?php } elseif($currentBewerber->getUnterlagenEingang()) { ?>
+			    <progress value="2" max="4" id="progressBar" style="margin-right: 12px;"></progress>
+			    Ihre Unterlagen sind eingegangen und befinden sich derzeit in Pr&uuml;fung.
+			<?php } elseif($currentBewerber->getAbgeschickt()) { ?>
+			    <progress value="1" max="4" id="progressBar" style="margin-right: 12px;"></progress>
+			    Sie haben Ihre Bewerbung online abgeschlossen, Ihre Unterlagen sind jedoch noch nicht bei uns eingegangen.
+			<?php } ?>
+		    </p>
+		</div>
+	</div>
+</div><br>
+<?php endif; ?>
+
+<div class="card-deck">
+	<div class="card">
+		<p class="card-header">Bewerbung für den Studiengang <b><?=$this->currentBewerber->getStudiengang()?></b> im <b><?=$this->currentBewerber->getIdSemester()?></b></p>
+		<div class="card-body">
+			<form>
+				<div class="form-row">
+					<div class="form-group col">
+						<table>
+							<th colspan="2"><u>Persönliche Daten</u></th>
+							<tr><th style="width: 180px">Anrede:</th><td><?php echo ($currentBewerber->getGeschlecht()=='m'?'Herr':'Frau');?></td></tr>
+							<tr><th>Vorname:</th><td><?=$this->currentBewerber->getVorname()?></td></tr>
+							<tr><th>Nachname:</th><td><?=$this->currentBewerber->getNachname()?></td></tr>
+							<tr><th>Strasse:</th><td><?=$this->currentBewerber->getStrasse()?></td></tr>
+							<tr><th>Hausnummer:</th><td><?=$this->currentBewerber->getHausnummer()?></td></tr>
+							<tr><th>PLZ:</th><td><?=$this->currentBewerber->getPlz()?></td></tr>
+							<tr><th>Ort:</th><td><?=$this->currentBewerber->getOrt()?></td></tr>
+							<tr><th>Land:</th><td><?=$this->currentBewerber->getIdLand()?></td></tr>
+							<tr><th>Geburtsdatum:</th><td><?=$this->currentBewerber->getGeburtsdatum()?></td></tr>
+							<tr><th>E-Mail:</th><td><?=$this->currentBewerber->getEmail()?></td></tr>
+						</table>
+					</div>
+					<div class="form-group col">
+					   	 <table>
+							<tr><th colspan="2"><u>Informationen zum Werdegang</u></th></tr>
+							<tr><th style="width: 180px">Letzte Hochschule:</th><td><?=$this->currentBewerber->getLetzteHochschule()?></td></tr>
+							<tr><th style="width: 180px">Letzte Hochschulart:</th><td><?=$this->currentBewerber->getLetzteHochschulart()?></td></tr>
+							<tr><th>Studiengang:</th><td><?=$this->currentBewerber->getStudiengang()?></td></tr>
+							<tr><th>Abschluss:</th><td><?=$this->currentBewerber->getAbschluss()?></td></tr>
+							<tr><th>Abschlussnote:</th><td><?=$this->currentBewerber->getAbschlussnote()?></td></tr>
+							<tr><th>International Student:</th><td><?=$this->currentBewerber->getInternationalStudent()?></td></tr>
+							<tr><th>Praktika:</th><td><?=$this->currentBewerber->getPraktika()?></td></tr>
+							<tr><th>Berufserfahrung:</th><td><?=$this->currentBewerber->getBerufserfahrung()?></td></tr>
+							<tr><th>Hinweise:</th><td><?=$this->currentBewerber->getHinweise()?></td></tr>
+							<tr><th>&nbsp;</th><td>&nbsp;</td></tr>
+							<tr><th>Modifikation:</th><td><?=$this->currentBewerber->getModifikation()?></td></tr>
+						</table> 
+				    	</div>
+				</div>
+			</form>
+			<div class="row">
+			<?php if($this->currentBewerber->getAbgeschickt()):?>
+				<p>Sie können Ihre Angaben nicht mehr korrigieren, da Sie Ihre Bewerbung bereits endgültig abgeschickt haben.</p>
+			<?php else: ?>
+				<span class="form-group col">			
+					<a  href="<?php echo $this->base;?>/master-bewerbung/bewerben?idBewerbungscode=<?php echo $this->currentBewerber->getIdBewerbungscode();?>"class="btn btn-outline-primary btn-block"> Angaben korrigieren</a>
+				</span>
+			<?php endif; ?>
+		</div>
+		</div>
+	</div>
+</div> 
+<br>
+			
+<div class="card-deck">
+	<div class="card">
+		<h2 class="card-header">Bewerbung vervollständigen</h2>
+		 <div class="card-body">		 
+<?php if(!$this->currentBewerber->getAbgeschickt()):?>
+			Sie können durch Anmeldung mit Ihrem persönlichen Bewerbungscode noch bis zum <?php echo $this->bewerbungsFrist ?> ändern. Sobald Sie Ihre Bewerbung jedoch endgültig abgeschickt haben, sind keine Änderungen mehr möglich. Sie können dann nur noch die PDF-Datei mit der Zusammenfassung Ihrer Bewerbung herunterladen, um diese zu unterschreiben und an das Dekanat zu senden.<br></br>
+			<?php else: ?>
+			Sie haben bereits Ihre Bewerbung endgültig abgeschickt und können somit keine Änderungen mehr vornehmen. Sie können nur noch die PDF-Datei mit der Zusammenfassung Ihrer Bewerbung herunterladen, um diese zu unterschreiben und an das Dekanat zu senden.
+			<?php endif; ?>
+			 <p>Ihr Bewerbungscode:<kbd id="bcode" data-clipboard-target="#bcode" style ="cursor: pointer;"><?php echo $this->currentBewerber->getIdBewerbungscode();?></kbd></p>
+			Bei Fragen können Sie uns unter folgender Nummer erreichen: +49 941 9432474. <br>
+		</div>
+	</div>
+</div><br>
+
+<?php if(!$this->currentBewerber->getAbgeschickt()):?>
+<div class="card-deck">
+	<div class="card">
+		<h2 class="card-header">Endgültiges Absenden Ihrer Bewerbung</h2>
+		 <div class="card-body">
+			Durch Anklicken des nachfolgenden Links senden Sie Ihre Bewerbung online ab. Sie erhalten dann ein PDF, das Sie ausdrucken, unterschreiben und an die Fakultät für Wirtschaftswissenschaften senden müssen.<br></br>
+			<div class="alert alert-danger">Bitte sehen Sie davon ab, die kompletten Bewerbungsunterlagen wie Lebenslauf, Anschreiben etc. postalisch zu versenden.</div>
+			<div class="form-check">
+			<input class="form-check-input" type="checkbox" value="" id="datenschutzimpressum">
+				<label class="form-check-label" for="defaultCheck1">Ich habe die <a href="https://www.uni-regensburg.de/datenschutz/" target="_blank">Datenschutzerklärung</a> und das <a href="https://www.uni-regensburg.de/impressum/index.html" target="_blank">Impressum</a> verstanden.<p></p>
+				</label>
+			</div>
+			<p><a href="<?php echo $this->base;?>/master-bewerbung/abschicken?idBewerbungscode=<?php echo $this->currentBewerber->getIdBewerbungscode();?>" id="abschicken" class="btn btn-primary" onclick="return checkAbschicken();">Bewerbung endgültig absenden</a>
+			</p>
+			</div>
+	</div>
+</div>
+<?php endif; ?>
+<script>
+	function checkAbschicken(){
+		if($('#datenschutzimpressum').is(':checked')){
+			return window.confirm('Sind Sie sicher? Wenn Sie OK anklicken, können Sie keine Unterlagen mehr hochladen oder andere Veränderungen an Ihrer Bewerbung vornehmen!');
+		}else{
+			alert('Sie müssen die Datenschutzerklärung sowie das Impressum akzeptieren.');
+			return false;	
+		}
+	}
+</script>

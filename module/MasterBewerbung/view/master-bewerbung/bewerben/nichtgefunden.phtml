@@ -1,0 +1,14 @@
+<?php  $this->headTitle('Nicht gefundene Master-Bewerbung – Fakultät für Wirtschaftswissenschaften der Uni Regensburg');?>
+
+<div class="container">
+	<div class="box">
+		<b>Bewerbung konnte nicht gefunden werden</b>
+		<p>Ihre Bewerbung mit dem Code <kbd><?php echo $this->idBewerbungscode;?></kbd>&nbsp;konnte nicht gefunden werden. Bitte überprüfen Sie die Schreibweise und versuchen Sie es erneut.</p>
+		<form action="zusammenfassung" method="get">
+		    <div class="input-group col-lg-6">
+			<input type="text" name="idBewerbungscode" id="idBewerbungscode" style="width: 200px" class="form-control" placeholder="Bewerbungscode" />
+			<div class="input-group-append"><button type="submit" class="btn btn-primary">Bewerbung aufrufen</button></div>
+		    </div>
+		</form>
+	</div>
+</div>

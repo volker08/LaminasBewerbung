@@ -1,0 +1,74 @@
+<?php
+$title = 'Master-Bewerbung - Fakultät für Wirtschaftswissenschaften';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1> <br>
+
+<div class="card-deck">
+	<div class="card">
+		<h2 class="card-header">Aktuelle Mitteilungen</h2>
+		 <div class="card-body">
+			Bei Fragen zum Bewerbungsprozess konsultieren Sie bitte zuerst die <a href="https://www.uni-regensburg.de/wirtschaftswissenschaften/fakultaet/service/studienberatung/faqs/index.html#masterbewerbung">FAQ</a> und das <a href="<?= $this->url('tutorial', ['action' => 'index']) ?>">Tutorial</a> zum Bewerbungsablauf. <br></br>
+			Ihnen stehen auch die Studienberater der Fakultät zur Verfügung (<a href="mailto:studienberatung@wiwi.uni-regensburg.de">studienberatung@wiwi.uni-regensburg.de</a>). <br><br>
+			Beratung für die Master-Studiengänge BWL, (I)VWL, Wirtschaftsinformatik, Immobilienwirtschaft: </br> Di 14-15 Uhr im RWS 109a <br> <br>
+			Bitte beachten Sie die angegebenen Sprechzeiten. <br>
+			Telefonnummer: 0941-943-2737 <br>
+		</div>
+		<div class="alert alert-warning">
+		Bitte sehen Sie von Nachfragen zum Bearbeitungsstand Ihrer Bewerbung ab. Sie werden automatisch per E-Mail benachrichtigt, wenn Ihre Bewerbung und die PDF-Zusammenfassung eingegangen ist.
+		Vorab können leider keine Auskünfte über bereits eingegangene Unterlagen gemacht werden.
+		</div>
+	</div>
+</div><br>
+
+<div class="card-deck">
+	<div class="card">
+		<h2 class="card-header">Neue Bewerbung</h2>
+		 <div class="card-body">
+			Hier können Sie sich für einen Master-Studiengang an der Wirtschaftswissenschaftlichen Fakultät der Universität Regensburg bewerben. Hierzu müssen Sie ein Online-Formular ausfüllen und Ihre eingescannten Bewerbungsunterlagen hochladen. Die Bewerbungsunterlagen selbst müssen nicht per Post an die Wirtschaftswissenschaftliche Fakultät geschickt werden. Eine detaillierte Anleitung zur Bewerbung finden Sie <a href="<?= $this->url('tutorial', ['action' => 'index']) ?>">hier</a><br> <br>
+
+			Auf dieser Seite ist es auch möglich, sich für die Honors-Studiengänge an der Wirtschaftswissenschaftlichen Fakultät zu bewerben. Weitere Informationen über die Honors-Studiengänge und die abweichenden Zulassungsvoraussetzungen finden Sie auf <a href="http://www.honors.de" target="_blank">www.honors.de</a>. Falls Sie sich für einen Honors-Studiengang bewerben, wird Ihre Bewerbung automatisch im entsprechenden regulären Studiengang berücksichtigt. Sie erhalten dann unter Umständen Zulassungsschreiben für beide Studiengänge.<br> <br>
+
+
+			Bitte beachten Sie, dass Ihre Bewerbung für das Wintersemester 2018/2019 bis zum <?php echo $this->bewerbungsFrist ?> bei der Fakultät eingehen muss.<br> <br>
+
+
+			Bitte informieren Sie sich über die Master-Studiengänge und das Bewerbungsverfahren auf den Informationsseiten der <a href="https://www.uni-regensburg.de/wirtschaftswissenschaften/fakultaet/startseite/index.html" target="_blank">Wirtschaftswissenschaftlichen Fakultät</a>und in §4 der <a href="https://www.uni-regensburg.de/studium/pruefungsordnungen/bachelor/wirtschaftswissenschaften/index.html" target="_blank">aktuellen Prüfungsordnung</a> . Bitte verschaffen Sie sich außerdem einen <a href="https://wiwi-app.uni-regensburg.de/studiendekan/AblaufMasterBeurteilung.php" target="_blank">Überblick über das Zulassungsverfahren</a> und die <a href="https://www.uni-regensburg.de/wirtschaftswissenschaften/fakultaet/service/studienberatung/faqs/index.html" target="_blank">häufig gestellten Fragen</a>.	
+		</div>
+		<div class="alert alert-primary">
+		<div style="font-weight:bold">Für ausländische Bewerber gelten besondere Regelungen</div>
+		Sie müssen zusätzlich zur Online-Bewerbung auf dieser Seite ihre Bewerbung zusammen mit allen Unterlagen in Schriftform an das Dekanat senden. Bitte informieren Sie sich auf der Seite des <a href="https://www.uni-regensburg.de/international/" target="_blank">International Office</a> im Bereich reguläre ausländische Studierende. If your native language is not German, you will have to include a certified statement regarding your German skills in your application.
+		</div>
+		<?php if(!$this->bewerbungsFristAbgelaufen):?>
+			<a class="btn btn-primary" href="<?= $this->url('masterbewerbung', ['action' => 'bewerben']) ?>">Bewerbung starten &raquo;</a>
+		<?php endif; ?>
+	</div>	
+</div> <br>
+
+<div class="card-deck">
+	<div class="card">
+		<h2 class="card-header">Bewerbung fortsetzen</h2>
+		 <div class="card-body">
+			Wenn Sie Ihre Bewerbung bereits begonnen und noch nicht abgeschlossen haben, können Sie diese durch Eingabe Ihres Bewerbungscodes fortsetzen.	
+                </div> 
+			<div >
+				<form action="<?php echo $this->base;?>master-bewerbung/zusammenfassung" method="get">
+				    <div class="input-group col-lg-6">
+				        <input type="text" name="idBewerbungscode" id="idBewerbungscode" style="width: 200px" class="form-control" placeholder="Bewerbungscode" />
+				        <div class="input-group-append"><button type="submit" class="btn btn-primary">Bewerbung aufrufen</button></div>
+				    </div>
+                		</form>
+			</div>
+
+	</div>
+</div><br>
+
+
+
+
+   
+
+
+
+
+
